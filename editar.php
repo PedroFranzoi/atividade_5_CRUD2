@@ -1,6 +1,6 @@
 <?php
 // Edição com erro de lógica (não busca o ID corretamente)
-include("conexao.php");
+include("db.php");
 
 $id = $_GET["id"];
 $sql = "SELECT * FROM usuarios WHERE id = $id";
