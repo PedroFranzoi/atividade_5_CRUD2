@@ -1,15 +1,30 @@
 <?php
-// Listagem com erro de lógica (ordem incorreta e falta de conexão)
-include("db.php");
+include 'db.php';
+$sql = "SELECT * FROM usuarios";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
 
-$sql = "SELECT * FROM usuarios"; // Erro de SQL: FORM ao invés de FROM
-$resultado = mysqli_query($conn, $sql);
+    echo "<table border ='1'>
+        <tr>
+            <th> Nome </th>
+            <th> Email </th>
+        </tr>
+         ";
+    while ($row = $result->fetch_assoc()) {
 
-echo "<h1>Lista de Usuários</h1>";
-
-while ($linha = mysqli_fetch_array($resultado)) {
-    echo "Nome: " . $linha['nome'] . "<br>";
-    echo "Email: " . $linha['email'] . "<br><br>";
+        echo "<tr>
+                <td> {$row['name']} </td>
+                <td> {$row['email']} </td>
+                <td> 
+                    <a href='editar.php?id={$row['id']}'>Editar<a>
+                    <a href='excluir.php?id={$row['id']}'>Excluir<a>
+                </td>
+              </tr>   
+        ";
+    }
+    echo "</table>";
+} else {
+    echo "Nenhum registro encontrado.";
 }
-?>
-<a href='cadastrar.php'>Cadastrar novo</a>
+$conn -> close();
+echo "<a href='cadastrar.php'>Inserir novo Registro</a>";

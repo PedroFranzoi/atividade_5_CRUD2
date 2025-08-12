@@ -1,20 +1,21 @@
 <?php
 // Edição com erro de lógica (não busca o ID corretamente)
 include("db.php");
-
 $id = $_GET["id"];
-$sql = "SELECT * FROM usuarios WHERE id = $id";
-$res = mysqli_query($conn, $sql);
-$dado = mysqli_fetch_assoc($res);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST["nome"];
     $email = $_POST["email"];
 
     $sql = "UPDATE usuarios SET nome='$nome', email='$email' WHERE id=$id";
-    mysqli_query($conn, $sql);
-    header("Location: index.php");
+    
 }
+
+$sql = "SELECT * FROM usuarios WHERE id = $id";
+$res = mysqli_query($conn, $sql);
+$dado = mysqli_fetch_assoc($res);
+
+
 ?>
 
 <form method="POST">

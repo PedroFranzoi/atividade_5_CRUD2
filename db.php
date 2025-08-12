@@ -8,6 +8,6 @@ $db = "atividade_5_CRUD2";
 $conn = mysqli_connect($host, $userName, $password, $db); // Erro: $hot ao invés de $host
 
 if (!$conn) {
-    echo "Falha na conexão!";
+    die("Falha na conexão: ".mysqli_connect_error());
 }
 ?>

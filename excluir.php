@@ -4,7 +4,13 @@ include("db.php");
 
 $id = $_GET["id"];
 $sql = "DELETE FROM usuarios WHERE id = $id";
-mysqli_query($conn, $sql);
 
-header("Location: index.php");
+if($conn->query($sql) === true){
+    echo "Registro excliuido com sucesso.
+    <a href='index.php'>Ver registros.</a>
+    ";
+}else{
+    echo"Erro". $sql . '<br>' . $conn->error;
+}
+$conn -> close();
 ?>
